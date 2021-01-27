@@ -6,9 +6,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SupMusic.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -18,6 +20,8 @@ namespace SupMusic.Controllers
             _logger = logger;
         }
 
+
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View();
@@ -27,6 +31,22 @@ namespace SupMusic.Controllers
         {
             return View();
         }
+
+        public IActionResult Discover()
+        {
+            return View();
+        }
+
+        public IActionResult playlists()
+        {
+            return View();
+        }
+
+        public IActionResult Upload()
+        {
+            return View();
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
