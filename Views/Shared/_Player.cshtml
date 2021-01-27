@@ -1,0 +1,17 @@
+﻿<div id="waveform"></div>
+
+<button onClick="start()" >play</button>
+
+<script src="https://unpkg.com/wavesurfer.js"></script>
+<script>
+
+    function start(){
+        wavesurfer.play();
+    }
+    var wavesurfer = WaveSurfer.create({
+        container: '#waveform',
+        waveColor: 'violet',
+        progressColor: 'purple'
+    });
+    wavesurfer.load('fete.wav');
+</script>
