@@ -39,7 +39,7 @@ namespace SupMusic.Controllers
             }
             catch (System.Exception error)
             {
-                ViewBag.resultMessage = error;
+                ViewBag.resultMessage = error.ToString();
             }
             return View();
         }
