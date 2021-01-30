@@ -1,5 +1,36 @@
 ﻿@{
     ViewData["Title"] = "Upload";
 }
+@model SupMusic.Models.SongModel;
 
-A form for uploading new songs to the site
+
+@using (Html.BeginForm("RegisterNewSong", "Home", FormMethod.Post))
+{
+    <table cellpadding="0" cellspacing="0">
+        <tr>
+            <th colspan="2" align="center">Person Details</th>
+        </tr>
+        <tr>
+            <td>Name: </td>
+            <td>
+                @Html.TextBoxFor(m => m.Name)
+            </td>
+        </tr>
+        <tr>
+            <td>path: </td>
+            <td>
+                @Html.TextBoxFor(m => m.Path)
+            </td>
+        </tr>
+        <tr>
+            <td>Duration: </td>
+            <td>
+                @Html.TextBoxFor(m => m.Duration)
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Submit" /></td>
+        </tr>
+    </table>
+}

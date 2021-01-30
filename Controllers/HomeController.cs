@@ -28,6 +28,22 @@ namespace SupMusic.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult RegisterNewSong(SongModel song)
+        {
+            try
+            {
+                _db.Song.Add(song);
+                _db.SaveChanges();
+                ViewBag.resultMessage = "success";
+            }
+            catch (System.Exception error)
+            {
+                ViewBag.resultMessage = error;
+            }
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
@@ -40,17 +56,20 @@ namespace SupMusic.Controllers
 
         public IActionResult playlists()
         {
-
-            /* TODO: clean ça
-            var song = new SongModel();
+            /*var song = new SongModel();
             // song.ID = 69;
             song.Name = "coucou";
             //   song.CategoryID = 69;
             song.Duration = 69;
             _db.Song.Add(song);
 
-            _db.SaveChanges();
-            */
+            _db.SaveChanges();*/
+
+            foreach (var item in _db.Song.ToArray())
+            {
+                Console.WriteLine(item.Name);
+
+            }
             return View();
         }
 
