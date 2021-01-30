@@ -8,5 +8,6 @@ namespace SupMusic.Models
         public int CategoryID { get; set; }
         public string Name { get; set; }
         public int Duration { get; set; }
+        public string Path { get; set; }
     }
 }

@@ -39,11 +39,10 @@ namespace SupMusic.Data
                 n.Property(p => p.Name).HasMaxLength(64);
 
                 // clé étrangère (song id)
-                n.HasMany<SongModel>()
-                .WithOne()
-                .HasForeignKey(fk => fk.ID)
-                .IsRequired();
-
+                /*   n.HasMany<SongModel>()
+                   .WithOne()
+                   .HasForeignKey(fk => fk.ID);
+                   */
             });
 
             modelBuilder.Entity<SongModel>(n =>

@@ -10,7 +10,7 @@ using SupMusic.Data;
 namespace SupMusic.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210130095051_setup")]
+    [Migration("20210130102246_setup")]
     partial class setup
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -244,7 +244,8 @@ namespace SupMusic.Data.Migrations
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
                     b.Property<int>("CategoryID")
                         .HasColumnType("int");
@@ -255,6 +256,9 @@ namespace SupMusic.Data.Migrations
                     b.Property<string>("Name")
                         .HasMaxLength(64)
                         .HasColumnType("nvarchar(64)");
+
+                    b.Property<string>("Path")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
 
@@ -308,15 +312,6 @@ namespace SupMusic.Data.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("SupMusic.Models.SongModel", b =>
-                {
-                    b.HasOne("SupMusic.Models.PlaylistModel", null)
-                        .WithMany()
-                        .HasForeignKey("ID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

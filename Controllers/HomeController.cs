@@ -7,17 +7,18 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-
+using Microsoft.EntityFrameworkCore;
+using SupMusic.Data;
 namespace SupMusic.Controllers
 {
     [Authorize]
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext _db;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ApplicationDbContext db)
         {
-            _logger = logger;
+            _db = db;
         }
 
 
@@ -39,6 +40,17 @@ namespace SupMusic.Controllers
 
         public IActionResult playlists()
         {
+
+            /* TODO: clean ça
+            var song = new SongModel();
+            // song.ID = 69;
+            song.Name = "coucou";
+            //   song.CategoryID = 69;
+            song.Duration = 69;
+            _db.Song.Add(song);
+
+            _db.SaveChanges();
+            */
             return View();
         }
 
