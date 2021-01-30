@@ -51,6 +51,8 @@ namespace SupMusic.Controllers
 
         public IActionResult Discover()
         {
+
+            ViewBag.songs = _db.Song.ToList();
             return View();
         }
 
