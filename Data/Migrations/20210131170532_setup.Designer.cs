@@ -10,7 +10,7 @@ using SupMusic.Data;
 namespace SupMusic.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210130102246_setup")]
+    [Migration("20210131170532_setup")]
     partial class setup
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -240,7 +240,7 @@ namespace SupMusic.Data.Migrations
                     b.ToTable("Playlist");
                 });
 
-            modelBuilder.Entity("SupMusic.Models.SongModel", b =>
+            modelBuilder.Entity("SupMusic.Models.Song", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -263,6 +263,24 @@ namespace SupMusic.Data.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Song");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            CategoryID = 1,
+                            Duration = 69,
+                            Name = "feteMan",
+                            Path = "./wwwroot/fete.wav"
+                        },
+                        new
+                        {
+                            ID = 2,
+                            CategoryID = 2,
+                            Duration = 69,
+                            Name = "Doja Cat",
+                            Path = "./wwwroot/Doja Cat - Say So (Official Video).mp3"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

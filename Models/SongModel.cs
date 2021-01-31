@@ -2,7 +2,7 @@ using System;
 
 namespace SupMusic.Models
 {
-    public class SongModel
+    public class Song
     {
         public int ID { get; set; }
         public int CategoryID { get; set; }

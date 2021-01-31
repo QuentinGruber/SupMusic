@@ -29,7 +29,7 @@ namespace SupMusic.Controllers
         }
 
         [HttpPost]
-        public IActionResult RegisterNewSong(SongModel song)
+        public IActionResult RegisterNewSong(Song song)
         {
             try
             {
@@ -58,7 +58,7 @@ namespace SupMusic.Controllers
 
         public IActionResult playlists()
         {
-            /*var song = new SongModel();
+            /*var song = new Song();
             // song.ID = 69;
             song.Name = "coucou";
             //   song.CategoryID = 69;

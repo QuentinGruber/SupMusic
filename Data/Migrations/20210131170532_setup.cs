@@ -35,6 +35,16 @@ namespace SupMusic.Data.Migrations
                 {
                     table.PrimaryKey("PK_Song", x => x.ID);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Song",
+                columns: new[] { "ID", "CategoryID", "Duration", "Name", "Path" },
+                values: new object[] { 1, 1, 69, "feteMan", "./wwwroot/fete.wav" });
+
+            migrationBuilder.InsertData(
+                table: "Song",
+                columns: new[] { "ID", "CategoryID", "Duration", "Name", "Path" },
+                values: new object[] { 2, 2, 69, "Doja Cat", "./wwwroot/Doja Cat - Say So (Official Video).mp3" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

@@ -15,7 +15,7 @@ namespace SupMusic.Data
         {
         }
         public DbSet<PlaylistModel> Playlist { get; set; }
-        public DbSet<SongModel> Song { get; set; }
+        public DbSet<Song> Song { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -39,13 +39,13 @@ namespace SupMusic.Data
                 n.Property(p => p.Name).HasMaxLength(64);
 
                 // clé étrangère (song id)
-                /*   n.HasMany<SongModel>()
+                /*   n.HasMany<Song>()
                    .WithOne()
                    .HasForeignKey(fk => fk.ID);
                    */
             });
 
-            modelBuilder.Entity<SongModel>(n =>
+            modelBuilder.Entity<Song>(n =>
             {
                 // clé primaire
                 n.HasKey(p => p.ID);
@@ -56,6 +56,26 @@ namespace SupMusic.Data
                 // taille maxi
                 n.Property(p => p.Name).HasMaxLength(64);
             });
+
+            modelBuilder.Entity<Song>()
+    .HasData(
+        new Song
+        {
+            ID = 1,
+            CategoryID = 1,
+            Name = "feteMan",
+            Path = "./wwwroot/fete.wav",
+            Duration = 69
+        },
+        new Song
+        {
+            ID = 2,
+            CategoryID = 2,
+            Name = "Doja Cat",
+            Path = "./wwwroot/Doja Cat - Say So (Official Video).mp3",
+            Duration = 69
+        }
+    );
         }
     }
 }
