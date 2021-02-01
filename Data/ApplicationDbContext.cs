@@ -62,7 +62,7 @@ namespace SupMusic.Data
         new Song
         {
             ID = 1,
-            CategoryID = 1,
+            Tags = "fete, clubbing",
             Name = "feteMan",
             Path = "/songs/fete.wav",
             Duration = 69
@@ -70,7 +70,7 @@ namespace SupMusic.Data
         new Song
         {
             ID = 2,
-            CategoryID = 2,
+            Tags = "pas, fou, egirl",
             Name = "Doja Cat",
             Path = "/songs/Doja Cat - Say So (Official Video).mp3",
             Duration = 69

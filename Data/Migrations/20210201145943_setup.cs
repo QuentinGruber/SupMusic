@@ -26,7 +26,7 @@ namespace SupMusic.Data.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CategoryID = table.Column<int>(type: "int", nullable: false),
+                    Tags = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: true),
                     Duration = table.Column<int>(type: "int", nullable: false),
                     Path = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -38,13 +38,13 @@ namespace SupMusic.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Song",
-                columns: new[] { "ID", "CategoryID", "Duration", "Name", "Path" },
-                values: new object[] { 1, 1, 69, "feteMan", "/songs/fete.wav" });
+                columns: new[] { "ID", "Duration", "Name", "Path", "Tags" },
+                values: new object[] { 1, 69, "feteMan", "/songs/fete.wav", "fete, clubbing" });
 
             migrationBuilder.InsertData(
                 table: "Song",
-                columns: new[] { "ID", "CategoryID", "Duration", "Name", "Path" },
-                values: new object[] { 2, 2, 69, "Doja Cat", "/songs/Doja Cat - Say So (Official Video).mp3" });
+                columns: new[] { "ID", "Duration", "Name", "Path", "Tags" },
+                values: new object[] { 2, 69, "Doja Cat", "/songs/Doja Cat - Say So (Official Video).mp3", "pas, fou, egirl" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

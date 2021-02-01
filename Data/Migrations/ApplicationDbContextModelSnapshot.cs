@@ -245,9 +245,6 @@ namespace SupMusic.Data.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int>("CategoryID")
-                        .HasColumnType("int");
-
                     b.Property<int>("Duration")
                         .HasColumnType("int");
 
@@ -258,6 +255,9 @@ namespace SupMusic.Data.Migrations
                     b.Property<string>("Path")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Tags")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("ID");
 
                     b.ToTable("Song");
@@ -266,18 +266,18 @@ namespace SupMusic.Data.Migrations
                         new
                         {
                             ID = 1,
-                            CategoryID = 1,
                             Duration = 69,
                             Name = "feteMan",
-                            Path = "/songs/fete.wav"
+                            Path = "/songs/fete.wav",
+                            Tags = "fete, clubbing"
                         },
                         new
                         {
                             ID = 2,
-                            CategoryID = 2,
                             Duration = 69,
                             Name = "Doja Cat",
-                            Path = "/songs/Doja Cat - Say So (Official Video).mp3"
+                            Path = "/songs/Doja Cat - Say So (Official Video).mp3",
+                            Tags = "pas, fou, egirl"
                         });
                 });
 

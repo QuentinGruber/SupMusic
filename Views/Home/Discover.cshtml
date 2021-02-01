@@ -1,6 +1,10 @@
 ﻿@{
     ViewData["Title"] = "Discover";
     List<Song> songs = ViewBag.songs;
+    string[] parseTags(string tags)
+    {
+        return tags.Split(',');
+    }
 }
 
 List of all songs we have on the site , can listen to them & add to playlist
@@ -10,6 +14,15 @@ List of all songs we have on the site , can listen to them & add to playlist
 {
     <ul>
         <div>@song.Name</div>
+        @foreach (var tag in parseTags(song.Tags))
+        {
+            <div>@tag</div>
+        }
         @Html.Partial("_Player", song)
     </ul>
 }
+
+
+<script>
+
+</script>
