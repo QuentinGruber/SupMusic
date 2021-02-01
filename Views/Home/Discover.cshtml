@@ -9,7 +9,7 @@ List of all songs we have on the site , can listen to them & add to playlist
 @foreach (var song in songs)
 {
     <ul>
-        <div>@song.Name<button>Play song</button></div>
+        <div>@song.Name</div>
         @Html.Partial("_Player", song)
     </ul>
 }
