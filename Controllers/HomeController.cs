@@ -37,8 +37,8 @@ namespace SupMusic.Controllers
             Console.WriteLine(file);
             try
             {
-                String songPath = "/songs/" + song.Name + ".wav";
-                using (var fileStream = new FileStream("./wwwroot" + songPath, FileMode.Create, FileAccess.Write))
+                song.Path = "/songs/" + song.Name + ".wav";
+                using (var fileStream = new FileStream("./wwwroot" + song.Path, FileMode.Create, FileAccess.Write))
                 {
                     file.CopyTo(fileStream); //copy the file that was sent to this path
                 }
