@@ -4,33 +4,33 @@
 @model SupMusic.Models.Song;
 
 
-@using (Html.BeginForm("RegisterNewSong", "Home", FormMethod.Post))
+@using (Html.BeginForm("RegisterNewSong", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-                <th colspan="2" align="center">Person Details</th>
-            </tr>
-            <tr>
-                <td>Name: </td>
-                <td>
-                    @Html.TextBoxFor(m => m.Name)
-                </td>
-            </tr>
-            <tr>
-                <td>path: </td>
-                <td>
-                    @Html.TextBoxFor(m => m.Path)
-                </td>
-            </tr>
-            <tr>
-                <td>song file: </td>
-                <td>
-                    <input id="FileUpload" type="File" runat="server" size="60" />
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><input type="submit" value="Submit" /></td>
-            </tr>
-        </table>
+    <table cellpadding="0" cellspacing="0">
+        <tr>
+            <th colspan="2" align="center">Person Details</th>
+        </tr>
+        <tr>
+            <td>Name: </td>
+            <td>
+                @Html.TextBoxFor(m => m.Name)
+            </td>
+        </tr>
+        <tr>
+            <td>path: </td>
+            <td>
+                @Html.TextBoxFor(m => m.Path)
+            </td>
+        </tr>
+        <tr>
+            <td>song file: </td>
+            <td>
+                <input id="FileUpload" name="file" type="File" runat="server" size="60" />
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Submit" /></td>
+        </tr>
+    </table>
 }

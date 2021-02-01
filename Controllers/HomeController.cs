@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using SupMusic.Data;
+using System.IO;
+using Microsoft.AspNetCore.Http;
+
 namespace SupMusic.Controllers
 {
     [Authorize]
@@ -29,13 +32,21 @@ namespace SupMusic.Controllers
         }
 
         [HttpPost]
-        public IActionResult RegisterNewSong(Song song)
+        public IActionResult RegisterNewSong(IFormFile file, Song song)
         {
+            Console.WriteLine(file);
             try
             {
+                String songPath = "/songs/" + song.Name + ".wav";
+                using (var fileStream = new FileStream("./wwwroot" + songPath, FileMode.Create, FileAccess.Write))
+                {
+                    file.CopyTo(fileStream); //copy the file that was sent to this path
+                }
                 _db.Song.Add(song);
                 _db.SaveChanges();
                 ViewBag.resultMessage = "success";
+
+
             }
             catch (System.Exception error)
             {
