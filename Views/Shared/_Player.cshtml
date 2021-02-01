@@ -4,19 +4,18 @@
 
 <div id=@PlayerId></div>
 
-<button onClick="start()">play</button>
+<button id="@PlayerId-button">play</button>
 
 <script src="https://unpkg.com/wavesurfer.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-
-    function start() {
-        wavesurfer.play();
-    }
-    Document.a
-    var wavesurfer = WaveSurfer.create({
-        container: "#@PlayerId",
-        waveColor: 'violet',
-        progressColor: 'purple'
-    });
-    wavesurfer.load('@Model.Path');
+    (() => {
+        const wavesurfer = new WaveSurfer.create({
+            container: "#@PlayerId",
+            waveColor: 'violet',
+            progressColor: 'purple'
+        });
+        $("#@PlayerId-button").click(() => wavesurfer.play());
+        wavesurfer.load('@Model.Path');
+    })()
 </script>
