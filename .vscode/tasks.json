@@ -37,6 +37,11 @@
                 "/consoleloggerparameters:NoSummary"
             ],
             "problemMatcher": "$msCompile"
-        }
+        },
+        {
+            "label": "Updt migration/database",
+            "type": "shell",
+            "command": "dotnet ef database drop && dotnet ef migrations remove && dotnet ef migrations add setup && dotnet ef database update",
+          }
     ]
 }

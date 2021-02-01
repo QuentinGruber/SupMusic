@@ -269,7 +269,7 @@ namespace SupMusic.Data.Migrations
                             CategoryID = 1,
                             Duration = 69,
                             Name = "feteMan",
-                            Path = "./songs/wwwroot/fete.wav"
+                            Path = "/songs/fete.wav"
                         },
                         new
                         {
@@ -277,7 +277,7 @@ namespace SupMusic.Data.Migrations
                             CategoryID = 2,
                             Duration = 69,
                             Name = "Doja Cat",
-                            Path = "./songs/wwwroot/Doja Cat - Say So (Official Video).mp3"
+                            Path = "/songs/Doja Cat - Say So (Official Video).mp3"
                         });
                 });
 

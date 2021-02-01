@@ -39,12 +39,12 @@ namespace SupMusic.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Song",
                 columns: new[] { "ID", "CategoryID", "Duration", "Name", "Path" },
-                values: new object[] { 1, 1, 69, "feteMan", "./songs/wwwroot/fete.wav" });
+                values: new object[] { 1, 1, 69, "feteMan", "/songs/fete.wav" });
 
             migrationBuilder.InsertData(
                 table: "Song",
                 columns: new[] { "ID", "CategoryID", "Duration", "Name", "Path" },
-                values: new object[] { 2, 2, 69, "Doja Cat", "./songs/wwwroot/Doja Cat - Say So (Official Video).mp3" });
+                values: new object[] { 2, 2, 69, "Doja Cat", "/songs/Doja Cat - Say So (Official Video).mp3" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

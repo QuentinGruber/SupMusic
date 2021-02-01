@@ -10,7 +10,7 @@ using SupMusic.Data;
 namespace SupMusic.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210201111519_setup")]
+    [Migration("20210201131649_setup")]
     partial class setup
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -271,7 +271,7 @@ namespace SupMusic.Data.Migrations
                             CategoryID = 1,
                             Duration = 69,
                             Name = "feteMan",
-                            Path = "./songs/wwwroot/fete.wav"
+                            Path = "/songs/fete.wav"
                         },
                         new
                         {
@@ -279,7 +279,7 @@ namespace SupMusic.Data.Migrations
                             CategoryID = 2,
                             Duration = 69,
                             Name = "Doja Cat",
-                            Path = "./songs/wwwroot/Doja Cat - Say So (Official Video).mp3"
+                            Path = "/songs/Doja Cat - Say So (Official Video).mp3"
                         });
                 });
 

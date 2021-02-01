@@ -1,17 +1,22 @@
-﻿<div id="waveform"></div>
+﻿@{
+    var PlayerId = "waveform-" + @Model.ID;
+}
+
+<div id=@PlayerId></div>
 
 <button onClick="start()">play</button>
 
 <script src="https://unpkg.com/wavesurfer.js"></script>
 <script>
 
-    function start(){
+    function start() {
         wavesurfer.play();
     }
+    Document.a
     var wavesurfer = WaveSurfer.create({
-        container: '#waveform',
+        container: "#@PlayerId",
         waveColor: 'violet',
         progressColor: 'purple'
     });
-    wavesurfer.load('fete.wav');
+    wavesurfer.load('@Model.Path');
 </script>

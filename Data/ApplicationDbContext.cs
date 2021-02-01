@@ -64,7 +64,7 @@ namespace SupMusic.Data
             ID = 1,
             CategoryID = 1,
             Name = "feteMan",
-            Path = "./songs/wwwroot/fete.wav",
+            Path = "/songs/fete.wav",
             Duration = 69
         },
         new Song
@@ -72,7 +72,7 @@ namespace SupMusic.Data
             ID = 2,
             CategoryID = 2,
             Name = "Doja Cat",
-            Path = "./songs/wwwroot/Doja Cat - Say So (Official Video).mp3",
+            Path = "/songs/Doja Cat - Say So (Official Video).mp3",
             Duration = 69
         }
     );
