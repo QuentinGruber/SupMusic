@@ -55,6 +55,25 @@ namespace SupMusic.Controllers
             return View();
         }
 
+
+        [HttpPost]
+        public IActionResult RegisterNewPlaylist(IFormFile file, Playlist playlist)
+        {
+            try
+            {
+                _db.Playlist.Add(playlist);
+                _db.SaveChanges();
+                ViewBag.resultMessage = "success";
+
+
+            }
+            catch (System.Exception error)
+            {
+                ViewBag.resultMessage = error.ToString();
+            }
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
@@ -67,22 +86,15 @@ namespace SupMusic.Controllers
             return View();
         }
 
+        public IActionResult CreatePlaylist()
+        {
+            ViewBag.playlists = _db.Playlist.ToList();
+            return View();
+        }
+
         public IActionResult playlists()
         {
-            /*var song = new Song();
-            // song.ID = 69;
-            song.Name = "coucou";
-            //   song.CategoryID = 69;
-            song.Duration = 69;
-            _db.Song.Add(song);
-
-            _db.SaveChanges();*/
-
-            foreach (var item in _db.Song.ToArray())
-            {
-                Console.WriteLine(item.Name);
-
-            }
+            ViewBag.playlists = _db.Playlist.ToList();
             return View();
         }
 

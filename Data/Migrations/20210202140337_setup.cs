@@ -13,6 +13,7 @@ namespace SupMusic.Data.Migrations
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: true),
+                    Tags = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     isPrivate = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -37,14 +38,22 @@ namespace SupMusic.Data.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Song",
-                columns: new[] { "ID", "Duration", "Name", "Path", "Tags" },
-                values: new object[] { 1, 69, "feteMan", "/songs/fete.wav", "fete, clubbing" });
+                table: "Playlist",
+                columns: new[] { "ID", "Name", "Tags", "isPrivate" },
+                values: new object[,]
+                {
+                    { 1, "Playlist de test public", "fete, clubbing", true },
+                    { 2, "Playlist de test privé", "fete, clubbing", false }
+                });
 
             migrationBuilder.InsertData(
                 table: "Song",
                 columns: new[] { "ID", "Duration", "Name", "Path", "Tags" },
-                values: new object[] { 2, 69, "Doja Cat", "/songs/Doja Cat - Say So (Official Video).mp3", "pas, fou, egirl" });
+                values: new object[,]
+                {
+                    { 1, 69, "feteMan", "/songs/fete.wav", "fete, clubbing" },
+                    { 2, 69, "Doja Cat", "/songs/Doja Cat - Say So (Official Video).mp3", "pas, fou, egirl" }
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

@@ -10,7 +10,7 @@ using SupMusic.Data;
 namespace SupMusic.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210201145943_setup")]
+    [Migration("20210202140337_setup")]
     partial class setup
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -221,7 +221,7 @@ namespace SupMusic.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("SupMusic.Models.PlaylistModel", b =>
+            modelBuilder.Entity("SupMusic.Models.Playlist", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -232,12 +232,31 @@ namespace SupMusic.Data.Migrations
                         .HasMaxLength(64)
                         .HasColumnType("nvarchar(64)");
 
+                    b.Property<string>("Tags")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("isPrivate")
                         .HasColumnType("bit");
 
                     b.HasKey("ID");
 
                     b.ToTable("Playlist");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Name = "Playlist de test public",
+                            Tags = "fete, clubbing",
+                            isPrivate = true
+                        },
+                        new
+                        {
+                            ID = 2,
+                            Name = "Playlist de test privé",
+                            Tags = "fete, clubbing",
+                            isPrivate = false
+                        });
                 });
 
             modelBuilder.Entity("SupMusic.Models.Song", b =>

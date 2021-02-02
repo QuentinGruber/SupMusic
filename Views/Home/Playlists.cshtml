@@ -1,5 +1,12 @@
 ﻿@{
     ViewData["Title"] = "My playlists";
+    var playlists = ViewBag.playlists;
 }
 
 panel de création de playlist
+
+<button onClick="location.href='/Home/CreatePlaylist'">Create a new playlist</button>
+@foreach (var playlist in playlists)
+{
+    <div>@playlist.Name</div>
+}

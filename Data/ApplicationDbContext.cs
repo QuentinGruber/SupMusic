@@ -14,7 +14,7 @@ namespace SupMusic.Data
             : base(options)
         {
         }
-        public DbSet<PlaylistModel> Playlist { get; set; }
+        public DbSet<Playlist> Playlist { get; set; }
         public DbSet<Song> Song { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -27,7 +27,7 @@ namespace SupMusic.Data
                 n.HasKey(p => p.Id);
             });
 
-            modelBuilder.Entity<PlaylistModel>(n =>
+            modelBuilder.Entity<Playlist>(n =>
             {
                 // clé primaire
                 n.HasKey(p => p.ID);
@@ -44,6 +44,26 @@ namespace SupMusic.Data
                    .HasForeignKey(fk => fk.ID);
                    */
             });
+
+            modelBuilder.Entity<Playlist>()
+    .HasData(
+        new Playlist
+        {
+            ID = 1,
+            Tags = "fete, clubbing",
+            Name = "Playlist de test public",
+            Songs = new int[] { 1, 2 },
+            isPrivate = true
+        },
+        new Playlist
+        {
+            ID = 2,
+            Tags = "fete, clubbing",
+            Name = "Playlist de test privé",
+            Songs = new int[] { 1 },
+            isPrivate = false
+        }
+    );
 
             modelBuilder.Entity<Song>(n =>
             {
