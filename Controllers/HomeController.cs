@@ -57,7 +57,7 @@ namespace SupMusic.Controllers
 
 
         [HttpPost]
-        public IActionResult RegisterNewPlaylist(IFormFile file, Playlist playlist)
+        public IActionResult RegisterNewPlaylist(Playlist playlist)
         {
             try
             {
@@ -74,6 +74,22 @@ namespace SupMusic.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult EditPlaylist(Playlist modifiedPlaylist)
+        {
+            try
+            {
+                var playlist = _db.Playlist.First(a => a.ID == modifiedPlaylist.ID);
+                playlist = modifiedPlaylist;
+                _db.SaveChanges();
+                ViewBag.resultMessage = "success";
+            }
+            catch (System.Exception error)
+            {
+                ViewBag.resultMessage = error.ToString();
+            }
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();
