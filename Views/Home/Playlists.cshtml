@@ -8,7 +8,7 @@ panel de création de playlist
 <button onClick="location.href='/Home/CreatePlaylist'">Create a new playlist</button>
 @foreach (var playlist in playlists)
 {
-    <div>@playlist.Name</div>
+    <div onclick="location.href='/Home/PlaylistPlayer?PlaylistId=@playlist.ID'">@playlist.Name</div>
     <button onClick="location.href='/Home/EditPlaylist?PlaylistId=@playlist.ID'">Edit playlist</button>
     <button onClick="location.href='/Home/DeletePlaylist?PlaylistId=@playlist.ID'">Delete playlist</button>
 }

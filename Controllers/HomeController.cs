@@ -116,6 +116,15 @@ namespace SupMusic.Controllers
             return View();
         }
 
+        public IActionResult PlaylistPlayer()
+        {
+
+            var songList = _db.Song.ToList();
+            ViewBag.song = songList[0];
+            return View();
+        }
+
+
         public IActionResult CreatePlaylist()
         {
             ViewBag.playlists = _db.Playlist.ToList();
