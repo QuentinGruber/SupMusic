@@ -79,7 +79,7 @@ namespace SupMusic.Controllers
         {
             _db.Update(modifiedPlaylist);
             _db.SaveChanges();
-            return Redirect("/Home/Playlists");
+            return RedirectToAction(nameof(playlists));
         }
         [HttpGet]
         public IActionResult EditPlaylist(int? PlaylistId)
@@ -87,6 +87,22 @@ namespace SupMusic.Controllers
             var choosenPlaylist = _db.Playlist.Find(PlaylistId);
             if (choosenPlaylist == null) return NotFound();
             return View(choosenPlaylist);
+        }
+
+        [HttpGet]
+        public IActionResult DeletePlaylist(int? PlaylistId)
+        {
+            var choosenPlaylist = _db.Playlist.Find(PlaylistId);
+            if (choosenPlaylist == null) return NotFound();
+            return View(choosenPlaylist);
+        }
+        [HttpPost]
+        public IActionResult DeletePlaylistConfirmed(Playlist PlaylistToDelete)
+        {
+            _db.Playlist.Attach(PlaylistToDelete);
+            _db.Playlist.Remove(PlaylistToDelete);
+            _db.SaveChanges();
+            return RedirectToAction(nameof(playlists));
         }
         public IActionResult Privacy()
         {
