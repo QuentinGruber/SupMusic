@@ -9,5 +9,5 @@ panel de création de playlist
 @foreach (var playlist in playlists)
 {
     <div>@playlist.Name</div>
-    <button onClick="location.href='/Home/EditPlaylist?'">Edit playlist</button>
+    <button onClick="location.href='/Home/EditPlaylist?PlaylistId=@playlist.ID'">Edit playlist</button>
 }

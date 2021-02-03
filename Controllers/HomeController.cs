@@ -77,18 +77,16 @@ namespace SupMusic.Controllers
         [HttpPost]
         public IActionResult EditPlaylist(Playlist modifiedPlaylist)
         {
-            try
-            {
-                var playlist = _db.Playlist.First(a => a.ID == modifiedPlaylist.ID);
-                playlist = modifiedPlaylist;
-                _db.SaveChanges();
-                ViewBag.resultMessage = "success";
-            }
-            catch (System.Exception error)
-            {
-                ViewBag.resultMessage = error.ToString();
-            }
-            return View();
+            _db.Update(modifiedPlaylist);
+            _db.SaveChanges();
+            return Redirect("/Home/Playlists");
+        }
+        [HttpGet]
+        public IActionResult EditPlaylist(int? PlaylistId)
+        {
+            var choosenPlaylist = _db.Playlist.Find(PlaylistId);
+            if (choosenPlaylist == null) return NotFound();
+            return View(choosenPlaylist);
         }
         public IActionResult Privacy()
         {
