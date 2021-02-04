@@ -30,8 +30,6 @@ namespace SupMusic.Controllers
         [AllowAnonymous]
         public IActionResult Index()
         {
-            var user = _userManager.GetUserId(HttpContext.User);
-            Console.WriteLine(user);
             return View();
         }
 
@@ -116,6 +114,7 @@ namespace SupMusic.Controllers
         public IActionResult Discover()
         {
 
+            ViewBag.userID = _userManager.GetUserId(HttpContext.User);
             ViewBag.songs = _db.Song.ToList();
             return View();
         }
