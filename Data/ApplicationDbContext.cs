@@ -82,6 +82,7 @@ namespace SupMusic.Data
         new Song
         {
             ID = 1,
+            OwnerID = "-1",
             Tags = "fete, clubbing",
             Name = "feteMan",
             Path = "/songs/fete.wav",
@@ -90,6 +91,7 @@ namespace SupMusic.Data
         new Song
         {
             ID = 2,
+            OwnerID = "-1",
             Tags = "pas, fou, egirl",
             Name = "Doja Cat",
             Path = "/songs/Doja Cat - Say So (Official Video).mp3",

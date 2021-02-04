@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using SupMusic.Data;
 using System.IO;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 
 namespace SupMusic.Controllers
 {
@@ -18,23 +19,25 @@ namespace SupMusic.Controllers
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext _db;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public HomeController(ApplicationDbContext db)
+        public HomeController(ApplicationDbContext db, UserManager<IdentityUser> userManager)
         {
+            _userManager = userManager;
             _db = db;
         }
-
 
         [AllowAnonymous]
         public IActionResult Index()
         {
+            var user = _userManager.GetUserId(HttpContext.User);
+            Console.WriteLine(user);
             return View();
         }
 
         [HttpPost]
         public IActionResult RegisterNewSong(IFormFile file, Song song)
         {
-            Console.WriteLine(file);
             try
             {
                 song.Path = "/songs/" + song.Name + ".wav";
@@ -42,6 +45,7 @@ namespace SupMusic.Controllers
                 {
                     file.CopyTo(fileStream); //copy the file that was sent to this path
                 }
+                song.OwnerID = _userManager.GetUserId(HttpContext.User);
                 _db.Song.Add(song);
                 _db.SaveChanges();
                 ViewBag.resultMessage = "success";

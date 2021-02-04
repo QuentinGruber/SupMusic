@@ -271,6 +271,9 @@ namespace SupMusic.Data.Migrations
                         .HasMaxLength(64)
                         .HasColumnType("nvarchar(64)");
 
+                    b.Property<string>("OwnerID")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Path")
                         .HasColumnType("nvarchar(max)");
 
@@ -287,6 +290,7 @@ namespace SupMusic.Data.Migrations
                             ID = 1,
                             Duration = 69,
                             Name = "feteMan",
+                            OwnerID = "-1",
                             Path = "/songs/fete.wav",
                             Tags = "fete, clubbing"
                         },
@@ -295,6 +299,7 @@ namespace SupMusic.Data.Migrations
                             ID = 2,
                             Duration = 69,
                             Name = "Doja Cat",
+                            OwnerID = "-1",
                             Path = "/songs/Doja Cat - Say So (Official Video).mp3",
                             Tags = "pas, fou, egirl"
                         });

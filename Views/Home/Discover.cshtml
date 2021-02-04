@@ -14,9 +14,12 @@ List of all songs we have on the site , can listen to them & add to playlist
 {
     <ul>
         <div>@song.Name</div>
+        <div>@song.OwnerID</div>
+        @if(song.Tags != null){
         @foreach (var tag in parseTags(song.Tags))
         {
             <div>@tag</div>
+        }
         }
         @Html.Partial("_Player", song)
     </ul>
