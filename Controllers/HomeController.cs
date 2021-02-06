@@ -62,6 +62,7 @@ namespace SupMusic.Controllers
         {
             try
             {
+                playlist.OwnerID = _userManager.GetUserId(HttpContext.User);
                 _db.Playlist.Add(playlist);
                 _db.SaveChanges();
                 ViewBag.resultMessage = "success";
@@ -129,8 +130,20 @@ namespace SupMusic.Controllers
 
         public IActionResult Discover()
         {
+            var userID = _userManager.GetUserId(HttpContext.User);
+            ViewBag.userID = userID;
+            List<Playlist> playlists = new List<Playlist>();
+            foreach (var playlist in _db.Playlist.ToList())
+            {
+                Console.WriteLine(playlist.OwnerID);
+                if (playlist.OwnerID == userID)
+                {
+                    Console.WriteLine("ouai");
+                    playlists.Add(playlist);
+                }
+            }
+            ViewBag.playlists = playlists;
 
-            ViewBag.userID = _userManager.GetUserId(HttpContext.User);
             ViewBag.songs = _db.Song.ToList();
             return View();
         }

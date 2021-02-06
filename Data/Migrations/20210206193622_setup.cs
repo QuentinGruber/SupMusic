@@ -12,6 +12,7 @@ namespace SupMusic.Data.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    OwnerID = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: true),
                     Tags = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Songs = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -41,11 +42,11 @@ namespace SupMusic.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Playlist",
-                columns: new[] { "ID", "Name", "Songs", "Tags", "isPrivate" },
+                columns: new[] { "ID", "Name", "OwnerID", "Songs", "Tags", "isPrivate" },
                 values: new object[,]
                 {
-                    { 1, "Playlist de test public", "1,2", "fete, clubbing", true },
-                    { 2, "Playlist de test privé", "1,2", "fete, clubbing", false }
+                    { 1, "Playlist de test public", null, "1,2", "fete, clubbing", true },
+                    { 2, "Playlist de test privé", null, "1,2", "fete, clubbing", false }
                 });
 
             migrationBuilder.InsertData(

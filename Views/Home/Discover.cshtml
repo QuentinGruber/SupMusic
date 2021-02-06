@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Discover";
     List<Song> songs = ViewBag.songs;
+    List<Playlist> playlists = ViewBag.playlists;
     string[] parseTags(string tags)
     {
         return tags.Split(',');
@@ -14,7 +15,13 @@ List of all songs we have on the site , can listen to them & add to playlist
 @foreach (var song in songs)
 {
     <ul>
-        <div>@song.Name</div>
+        <div>@song.Name
+
+            @foreach (var playlist in playlists)
+            {
+                <button>Add to @playlist.Name</button>
+            }
+        </div>
         @if(song.Tags != null){
         @foreach (var tag in parseTags(song.Tags))
         {

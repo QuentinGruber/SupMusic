@@ -10,7 +10,7 @@ using SupMusic.Data;
 namespace SupMusic.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210206175442_setup")]
+    [Migration("20210206193622_setup")]
     partial class setup
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -231,6 +231,9 @@ namespace SupMusic.Data.Migrations
                     b.Property<string>("Name")
                         .HasMaxLength(64)
                         .HasColumnType("nvarchar(64)");
+
+                    b.Property<string>("OwnerID")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Songs")
                         .HasColumnType("nvarchar(max)");
