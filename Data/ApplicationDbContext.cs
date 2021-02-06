@@ -52,7 +52,7 @@ namespace SupMusic.Data
             ID = 1,
             Tags = "fete, clubbing",
             Name = "Playlist de test public",
-            Songs = new int[] { 1, 2 },
+            Songs = "1,2",
             isPrivate = true
         },
         new Playlist
@@ -60,7 +60,7 @@ namespace SupMusic.Data
             ID = 2,
             Tags = "fete, clubbing",
             Name = "Playlist de test privé",
-            Songs = new int[] { 1 },
+            Songs = "1,2",
             isPrivate = false
         }
     );

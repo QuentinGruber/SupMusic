@@ -230,6 +230,9 @@ namespace SupMusic.Data.Migrations
                         .HasMaxLength(64)
                         .HasColumnType("nvarchar(64)");
 
+                    b.Property<string>("Songs")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Tags")
                         .HasColumnType("nvarchar(max)");
 
@@ -245,6 +248,7 @@ namespace SupMusic.Data.Migrations
                         {
                             ID = 1,
                             Name = "Playlist de test public",
+                            Songs = "1,2",
                             Tags = "fete, clubbing",
                             isPrivate = true
                         },
@@ -252,6 +256,7 @@ namespace SupMusic.Data.Migrations
                         {
                             ID = 2,
                             Name = "Playlist de test privé",
+                            Songs = "1,2",
                             Tags = "fete, clubbing",
                             isPrivate = false
                         });
