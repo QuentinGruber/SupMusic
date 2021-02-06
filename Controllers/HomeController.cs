@@ -135,10 +135,8 @@ namespace SupMusic.Controllers
             List<Playlist> playlists = new List<Playlist>();
             foreach (var playlist in _db.Playlist.ToList())
             {
-                Console.WriteLine(playlist.OwnerID);
                 if (playlist.OwnerID == userID)
                 {
-                    Console.WriteLine("ouai");
                     playlists.Add(playlist);
                 }
             }
