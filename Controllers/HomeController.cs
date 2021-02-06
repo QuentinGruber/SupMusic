@@ -12,7 +12,6 @@ using SupMusic.Data;
 using System.IO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-
 namespace SupMusic.Controllers
 {
     [Authorize]
@@ -105,6 +104,23 @@ namespace SupMusic.Controllers
             _db.Playlist.Remove(PlaylistToDelete);
             _db.SaveChanges();
             return RedirectToAction(nameof(playlists));
+        }
+
+        [HttpGet]
+        public IActionResult DeleteSong(int? SongId)
+        {
+            var choosenSong = _db.Song.Find(SongId);
+            if (choosenSong == null) return NotFound();
+            return View(choosenSong);
+        }
+        [HttpPost]
+        public IActionResult DeleteSongConfirmed(Song SongToDelete)
+        {
+            System.IO.File.Delete("./wwwroot" + SongToDelete.Path);
+            _db.Song.Attach(SongToDelete);
+            _db.Song.Remove(SongToDelete);
+            _db.SaveChanges();
+            return RedirectToAction(nameof(Discover));
         }
         public IActionResult Privacy()
         {

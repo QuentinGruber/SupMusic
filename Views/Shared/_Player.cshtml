@@ -8,7 +8,7 @@
 <input id="@PlayerId-volume" type="range" min="0" max="1" value="1" step="0.1">
 @if (@ViewBag.userID == @Model.OwnerID)
 {
-    <button id="@PlayerId-mute">delete</button>
+    <button id="@PlayerId-delete">delete</button>
 }
 
 <script src="https://unpkg.com/wavesurfer.js"></script>
@@ -31,6 +31,7 @@
 
         $("#@PlayerId-play").click(() => wavesurfer.playPause());
         $("#@PlayerId-mute").click(() => wavesurfer.toggleMute());
+        $("#@PlayerId-delete").click(() => location.href = "/Home/DeleteSong?SongId=@Model.ID");
 
         let SongVolume = localStorage.getItem("SongVolume");
         if (SongVolume) {
