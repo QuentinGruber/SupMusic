@@ -2,33 +2,38 @@
     ViewData["Title"] = "Create Playlist";
 }
 @model SupMusic.Models.Playlist;
+<h1 class="text-primary">Create a new playlist !</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="RegisterNewPlaylist">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+            <input type="hidden" asp-for="OwnerID" />
+            <input type="hidden" asp-for="Songs" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label text-primary"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tags" class="control-label text-primary"></label>
+                <input asp-for="Tags" class="form-control" />
+                <span asp-validation-for="Tags" class="text-danger"></span>
+                <span> (example: jazz, cool)</span>
+            </div>
+            <div class="form-group">
+                <label asp-for="isPrivate" class="control-label text-primary"></label>
+                <input asp-for="isPrivate" class="form-control" />
+                <span asp-validation-for="isPrivate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
 
-
-@using (Html.BeginForm("RegisterNewPlaylist", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    <table cellpadding="0" cellspacing="0">
-        <tr>
-            <th colspan="2" align="center">Create a new playlist !</th>
-        </tr>
-        <tr>
-            <td>Name: </td>
-            <td>
-                @Html.TextBoxFor(m => m.Name)
-            </td>
-        </tr>
-        <tr>
-            <td>Tags: </td>
-            <td>
-                @Html.TextBoxFor(m => m.Tags)
-            </td>
-            <td> (eq: jazz,cool)</td>
-        </tr>
-        <tr>
-            <td>Private playlist: @Html.CheckBoxFor(m => m.isPrivate)</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td><input type="submit" value="Submit" class="btn btn-success" /></td>
-        </tr>
-    </table>
-}
+<div>
+    <a asp-action="Playlists">Back to Playlists</a>
+</div>

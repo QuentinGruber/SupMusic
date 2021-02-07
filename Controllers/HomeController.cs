@@ -208,7 +208,7 @@ namespace SupMusic.Controllers
             ViewBag.userID = userID;
             return View();
         }
-
+        [AllowAnonymous]
         public ActionResult switchTheme()
         {
             if (Global.isInDarkMode == true)

@@ -36,7 +36,7 @@
                             <a class="nav-link text-info nav-button" asp-area="" asp-controller="Home" asp-action="Upload">Upload new song</a>
                         </li>
                         <li class="nav-item nav-button">
-                           @using (Html.BeginForm("switchTheme", "Home", new { Id = 10 }, FormMethod.Get))
+                           @using (Html.BeginForm("switchTheme", "Home", null, FormMethod.Get))
                             {
                                 @if(Global.isInDarkMode){
                                     <button class="btn btn-secondary">LightMode</button>
