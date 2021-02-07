@@ -4,15 +4,17 @@
     ViewData["Title"] = "EditPlaylist";
 }
 
-<h1 class="text-primary" >Edit Playlist "@Model.Name"</h1>
+<h1 class="text-primary">Edit Playlist "@Model.Name"</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="EditPlaylist">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ID" />
+            <input type="hidden" asp-for="OwnerID" />
+            <input type="hidden" asp-for="Songs" />
             <div class="form-group">
-                <label asp-for="Name" class="control-label text-secondary" ></label>
+                <label asp-for="Name" class="control-label text-primary"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
@@ -37,7 +39,3 @@
 <div>
     <a asp-action="Playlists">Back to Playlist</a>
 </div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

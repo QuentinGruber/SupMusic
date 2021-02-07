@@ -10,10 +10,10 @@
     }
     String userID = ViewBag.userID;
 }
-
+<h1 class="text-info">Discover new songs !</h1>
 @foreach (var song in songs)
 {
-    <ul>
+    <div class="blueCard">
         <h4 class="text-info">@song.Name</h4>
         @if(song.Tags != null){
         @foreach (var tag in parseTags(song.Tags))
@@ -32,7 +32,7 @@
                 </form>
                 }
             }
-    </ul>
+    </div>
 }
 
 <style>

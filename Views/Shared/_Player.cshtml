@@ -2,15 +2,15 @@
     var PlayerId = "waveform-" + @Model.ID;
 }
 <div id=@PlayerId></div>
-
-<button id="@PlayerId-play" class="btn btn-primary">play</button>
-<button id="@PlayerId-mute" class="btn btn-warning">mute</button>
-<input id="@PlayerId-volume" type="range" min="0.05" max="1" step="0.05" class="btn btn-info">
-@if (@ViewBag.userID == @Model.OwnerID)
-{
-    <button id="@PlayerId-delete" class="btn btn-danger">delete</button>
-}
-
+<div class="player_buttons">
+    <button id="@PlayerId-mute" class="btn btn-warning">mute</button>
+    <button id="@PlayerId-play" class="btn btn-primary">play</button>
+    <input id="@PlayerId-volume" type="range" min="0.05" max="1" step="0.05" class="btn btn-info">
+    @if (@ViewBag.userID == @Model.OwnerID)
+    {
+        <button id="@PlayerId-delete" class="btn btn-danger">delete</button>
+    }
+</div>
 <script src="https://unpkg.com/wavesurfer.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
@@ -25,8 +25,10 @@
 
         const wavesurfer = new WaveSurfer.create({
             container: "#@PlayerId",
-            waveColor: 'violet',
-            progressColor: 'purple'
+            waveColor: '#1b6ec2',
+            progressColor: '#95a5a6',
+            barWidth: 5,
+            barMinHeight: 1
         });
 
         $("#@PlayerId-play").click(() => wavesurfer.playPause());
@@ -48,3 +50,11 @@
 
     })()
 </script>
+
+<style>
+    .player_buttons {
+        margin: 5px;
+        align-items: center;
+        justify-content: center;
+    }
+</style>

@@ -82,7 +82,11 @@ namespace SupMusic.Controllers
         [HttpPost]
         public IActionResult EditPlaylist(Playlist modifiedPlaylist)
         {
-            _db.Update(modifiedPlaylist);
+            if (modifiedPlaylist.Songs == null) // to fix an issue where a "" can be interpreted as null
+            {
+                modifiedPlaylist.Songs = "";
+            }
+            _db.Playlist.Update(modifiedPlaylist);
             _db.SaveChanges();
             return RedirectToAction(nameof(playlists));
         }
@@ -135,7 +139,6 @@ namespace SupMusic.Controllers
                 return RedirectToAction(nameof(Discover));
             }
             playlistTargeted.Songs += request.SongId.ToString() + ",";
-            Console.WriteLine(playlistTargeted.Songs);
             _db.Playlist.Update(playlistTargeted);
             _db.SaveChanges();
             return RedirectToAction(nameof(Discover));

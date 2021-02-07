@@ -2,13 +2,15 @@
 @{
     ViewData["Title"] = "My playlists";
     var playlists = ViewBag.playlists;
-   Console.WriteLine(playlists[0].Songs.Replace("," , "").Length);
 }
 
-<button onClick="location.href='/Home/CreatePlaylist'" class="btn btn-info">Create a new playlist</button>
+<button onClick="location.href='/Home/CreatePlaylist'" class="btn btn-info form_style">Create a new playlist</button>
+<br>
+<br>
+<br>
 @foreach (var playlist in playlists)
 {
-    <div class="playlist">
+    <div class="blueCard">
     <H2 class="text-primary">@playlist.Name</H2>
      @if(playlist.Tags != null){
         @foreach (var tag in playlist.Tags.Split(','))
@@ -17,7 +19,7 @@
         }
         }
         <br>
-        @if(playlist.Songs.Replace("," , "").Length != 0){
+        @if(playlist.Songs != null && playlist.Songs.Replace("," , "").Length != 0){
     <button onClick="location.href = '/Home/PlaylistPlayer?PlaylistId=@playlist.ID&index=0'"
         class="btn btn-primary">Listen</button>
         }
@@ -34,12 +36,10 @@
 }
 
 <style>
-    .playlist {
-        margin-top: 15px;
-        padding: 5px;
-        font-size: 1.5rem;
-        border-style: solid;
-        border-color: blue;
-        border-radius: 5px;
-    }
+    .form_style {
+    float: right;
+    font-size: 1.5rem;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
 </style>
