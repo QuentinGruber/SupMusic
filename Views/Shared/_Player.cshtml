@@ -42,7 +42,7 @@
             wavesurfer.setVolume(SongVolume);
             localStorage.setItem("SongVolume", SongVolume)
         }
-        document.querySelector('#@PlayerId-volume').value = SongVolume; // TODO: utilise jquery
+        $('#@PlayerId-volume').val(SongVolume);
         $('#@PlayerId-volume').change(changeVolume)
         wavesurfer.load('@Model.Path');
 

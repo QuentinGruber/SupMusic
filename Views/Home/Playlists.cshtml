@@ -2,18 +2,44 @@
 @{
     ViewData["Title"] = "My playlists";
     var playlists = ViewBag.playlists;
+   Console.WriteLine(playlists[0].Songs.Replace("," , "").Length);
 }
-
-panel de création de playlist
 
 <button onClick="location.href='/Home/CreatePlaylist'" class="btn btn-info">Create a new playlist</button>
 @foreach (var playlist in playlists)
 {
-    <H6>@playlist.Name</H6>
+    <div class="playlist">
+    <H2 class="text-primary">@playlist.Name</H2>
+     @if(playlist.Tags != null){
+        @foreach (var tag in playlist.Tags.Split(','))
+        {
+            <span class="badge badge-pill badge-warning">@tag</span>
+        }
+        }
+        <br>
+        @if(playlist.Songs.Replace("," , "").Length != 0){
     <button onClick="location.href = '/Home/PlaylistPlayer?PlaylistId=@playlist.ID&index=0'"
         class="btn btn-primary">Listen</button>
+        }
+        else{
+            <label class="text-warning"> You can find songs to add to your playlist on the <a href="/Home/Discover">Discover</a> page.</label>
+            <br>
+        }
+
 
     <button onClick="location.href='/Home/EditPlaylist?PlaylistId=@playlist.ID'" class="btn btn-info">Edit playlist</button>
     <button onClick="location.href='/Home/DeletePlaylist?PlaylistId=@playlist.ID'" class="btn btn-danger">Delete
         playlist</button>
+        </div>
 }
+
+<style>
+    .playlist {
+        margin-top: 15px;
+        padding: 5px;
+        font-size: 1.5rem;
+        border-style: solid;
+        border-color: blue;
+        border-radius: 5px;
+    }
+</style>

@@ -4,9 +4,7 @@
     ViewData["Title"] = "EditPlaylist";
 }
 
-<h1>Edit</h1>
-
-<h4>Products</h4>
+<h1 class="text-primary" >Edit Playlist "@Model.Name"</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -14,17 +12,18 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ID" />
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
+                <label asp-for="Name" class="control-label text-secondary" ></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Tags" class="control-label"></label>
+                <label asp-for="Tags" class="control-label text-primary"></label>
                 <input asp-for="Tags" class="form-control" />
                 <span asp-validation-for="Tags" class="text-danger"></span>
+                <span> (example: jazz, cool)</span>
             </div>
             <div class="form-group">
-                <label asp-for="isPrivate" class="control-label"></label>
+                <label asp-for="isPrivate" class="control-label text-primary"></label>
                 <input asp-for="isPrivate" class="form-control" />
                 <span asp-validation-for="isPrivate" class="text-danger"></span>
             </div>
@@ -36,7 +35,7 @@
 </div>
 
 <div>
-    <a asp-action="Playlists">Back to List</a>
+    <a asp-action="Playlists">Back to Playlist</a>
 </div>
 
 @section Scripts {

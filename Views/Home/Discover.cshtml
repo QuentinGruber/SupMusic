@@ -1,4 +1,4 @@
-﻿@model SupMusic.Models.AddPlaylistModel
+﻿@model SupMusic.Models.ModifyPlaylistModel
 
 @{
     ViewData["Title"] = "Discover";
@@ -11,32 +11,32 @@
     String userID = ViewBag.userID;
 }
 
-List of all songs we have on the site , can listen to them & add to playlist
-
-
 @foreach (var song in songs)
 {
     <ul>
-        <div>@song.Name
-
-            @foreach (var playlist in playlists)
+        <h4 class="text-info">@song.Name</h4>
+        @if(song.Tags != null){
+        @foreach (var tag in parseTags(song.Tags))
+        {
+            <span class="badge badge-pill badge-warning">@tag</span>
+        }
+        }
+        @Html.Partial("_Player", song)
+         @foreach (var playlist in playlists)
             {
                 @if(!playlist.Songs.Contains(song.ID.ToString())){
                 <form asp-action="AddSongToPlaylist" method="post">
                      <input type="hidden" asp-for="PlaylistId" value="@playlist.ID" />
-                     <input type="hidden" asp-for="UserId" value="@userID" />
                      <input type="hidden" asp-for="SongId" value="@song.ID" />
-                <input type="submit" runat="server" onserverclick="AddSongToPlaylist" value="Add to @playlist.Name" class="btn btn-outline-Info"/>
+                <input type="submit" runat="server" onserverclick="AddSongToPlaylist" value="Add to '@playlist.Name' playlist" class="btn btn-outline-info"/>
                 </form>
                 }
             }
-        </div>
-        @if(song.Tags != null){
-        @foreach (var tag in parseTags(song.Tags))
-        {
-            <span class="badge badge-pill badge-primary">@tag</span>
-        }
-        }
-        @Html.Partial("_Player", song)
     </ul>
 }
+
+<style>
+    form{
+        margin-top: 5px;
+    }
+</style>

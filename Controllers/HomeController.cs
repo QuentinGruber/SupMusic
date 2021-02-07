@@ -21,6 +21,7 @@ namespace SupMusic.Controllers
         private readonly ApplicationDbContext _db;
         private readonly UserManager<IdentityUser> _userManager;
 
+
         public HomeController(ApplicationDbContext db, UserManager<IdentityUser> userManager)
         {
             _userManager = userManager;
@@ -125,14 +126,11 @@ namespace SupMusic.Controllers
             return RedirectToAction(nameof(Discover));
         }
         [HttpPost]
-        public IActionResult AddSongToPlaylist(AddPlaylistModel request)
+        public IActionResult AddSongToPlaylist(ModifyPlaylistModel request)
         {
-            Console.WriteLine(request.PlaylistId);
-            Console.WriteLine(request.UserId);
-            Console.WriteLine(request.SongId);
             Playlist playlistTargeted = _db.Playlist.Find(request.PlaylistId);
-
-            if (playlistTargeted.OwnerID != request.UserId)
+            var userID = _userManager.GetUserId(HttpContext.User);
+            if (playlistTargeted.OwnerID != userID)
             { // security
                 return RedirectToAction(nameof(Discover));
             }
@@ -141,6 +139,33 @@ namespace SupMusic.Controllers
             _db.Playlist.Update(playlistTargeted);
             _db.SaveChanges();
             return RedirectToAction(nameof(Discover));
+        }
+        public IActionResult RemoveSongToPlaylist(ModifyPlaylistModel request)
+        {
+            Playlist playlistTargeted = _db.Playlist.Find(request.PlaylistId);
+            var userID = _userManager.GetUserId(HttpContext.User);
+            if (playlistTargeted.OwnerID != userID)
+            {
+                return RedirectToAction(nameof(Discover));
+            }
+            var listOfSongs = playlistTargeted.Songs.Split(',').ToList();// += request.SongId.ToString() + ",";
+            listOfSongs.Remove(request.SongId);
+            String StringOfSongs = "";
+            foreach (var song in listOfSongs)
+            {
+                StringOfSongs += song + ",";
+            }
+            playlistTargeted.Songs = StringOfSongs;
+            _db.Playlist.Update(playlistTargeted);
+            _db.SaveChanges();
+            if (playlistTargeted.Songs.Replace(",", "").Length != 0)
+            {
+                return Redirect(Request.Headers["Referer"].ToString());
+            }
+            else
+            {
+                return RedirectToAction(nameof(playlists));
+            }
         }
         public IActionResult Privacy()
         {
@@ -174,9 +199,14 @@ namespace SupMusic.Controllers
             var playlist = _db.Playlist.Find(PlaylistId);
             var songList = _db.Song.Where(song => playlist.Songs.Contains(song.ID.ToString()));
             var userID = _userManager.GetUserId(HttpContext.User);
+            if (index >= songList.Count())
+            {
+                index = 0;
+            }
             ViewBag.playlist = playlist;
             ViewBag.index = index;
             ViewBag.songList = songList.ToList();
+            ViewBag.userID = userID;
             return View();
         }
 
@@ -201,7 +231,8 @@ namespace SupMusic.Controllers
 
         public IActionResult playlists()
         {
-            ViewBag.playlists = _db.Playlist.ToList();
+            var userID = _userManager.GetUserId(HttpContext.User);
+            ViewBag.playlists = _db.Playlist.Where(playlist => playlist.OwnerID == userID).ToList();
             return View();
         }
 

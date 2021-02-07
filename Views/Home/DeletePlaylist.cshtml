@@ -7,20 +7,18 @@
 
 <h1>Delete</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Are you sure you want to delete "@Model.Name" playlist?</h3>
 <div>
-    <h4>Playlist</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(Playlist => Playlist.Name)
-        </dt>
-        // TODO: ajoute qqch par rapport a si elle est public
-    </dl>
-
+    @if (@Model.isPrivate == false)
+    {
+        <p>
+            This playlist is public , to make it private you can <a href="/Home/EditPlaylist?PlaylistId=@Model.ID">EDIT</a>
+            it rather than deleting it.
+        </p>
+    }
     <form asp-action="DeletePlaylistConfirmed">
         <input type="hidden" asp-for="ID" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Playlists">Back to List</a>
+        <a asp-action="Playlists">Back to my playlist</a>
     </form>
 </div>
