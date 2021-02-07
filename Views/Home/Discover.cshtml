@@ -1,4 +1,6 @@
-﻿@{
+﻿@model SupMusic.Models.AddPlaylistModel
+
+@{
     ViewData["Title"] = "Discover";
     List<Song> songs = ViewBag.songs;
     List<Playlist> playlists = ViewBag.playlists;
@@ -19,7 +21,14 @@ List of all songs we have on the site , can listen to them & add to playlist
 
             @foreach (var playlist in playlists)
             {
-                <button>Add to @playlist.Name</button>
+                @if(!playlist.Songs.Contains(song.ID.ToString())){
+                <form asp-action="AddSongToPlaylist" method="post">
+                     <input type="hidden" asp-for="PlaylistId" value="@playlist.ID" />
+                     <input type="hidden" asp-for="UserId" value="@userID" />
+                     <input type="hidden" asp-for="SongId" value="@song.ID" />
+                <input type="submit" runat="server" onserverclick="AddSongToPlaylist" value="Add to @playlist.Name"/>
+                </form>
+                }
             }
         </div>
         @if(song.Tags != null){
@@ -31,8 +40,3 @@ List of all songs we have on the site , can listen to them & add to playlist
         @Html.Partial("_Player", song)
     </ul>
 }
-
-
-<script>
-
-</script>

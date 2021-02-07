@@ -1,4 +1,5 @@
-﻿@{
+﻿@model SupMusic.Models.Playlist
+@{
     ViewData["Title"] = "My playlists";
     var playlists = ViewBag.playlists;
 }
@@ -8,7 +9,9 @@ panel de création de playlist
 <button onClick="location.href='/Home/CreatePlaylist'">Create a new playlist</button>
 @foreach (var playlist in playlists)
 {
-    <div onclick="location.href='/Home/PlaylistPlayer?PlaylistId=@playlist.ID'">@playlist.Name</div>
+    <H6>@playlist.Name</H6>
+    <button onClick="location.href = '/Home/PlaylistPlayer?PlaylistId=@playlist.ID&index=0'">Listen</button>
+
     <button onClick="location.href='/Home/EditPlaylist?PlaylistId=@playlist.ID'">Edit playlist</button>
     <button onClick="location.href='/Home/DeletePlaylist?PlaylistId=@playlist.ID'">Delete playlist</button>
 }

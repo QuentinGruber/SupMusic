@@ -1,6 +1,65 @@
 ﻿@{
     ViewData["Title"] = "nomsdelaplay";
-    Song song = ViewBag.song;
+    List<Song> songList = ViewBag.songList;
+    int songIndex = ViewBag.index;
+    Playlist playlist = ViewBag.playlist;
+    var PlayerId = "waveform";
 }
 
-@Html.Partial("_Player", song);
+<div id=@PlayerId></div>
+<button onclick="previousSong()">previous</button>
+<button id="@PlayerId-play">play</button>
+<button id="@PlayerId-mute">mute</button>
+<input id="@PlayerId-volume" type="range" min="0" max="1" value="1" step="0.1">
+<button onclick="nextSong()">next</button>
+@if (@ViewBag.userID == @playlist.OwnerID)
+{
+    <button id="@PlayerId-delete">delete</button>
+}
+
+<script src="https://unpkg.com/wavesurfer.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+
+    function nextSong() {
+        var nextSongIndex = @songIndex + 1;
+        if (nextSongIndex < @songList.Count) {
+            location.href = "/Home/PlaylistPlayer?PlaylistId=@playlist.ID&index=" + nextSongIndex
+        }
+    }
+    function previousSong() {
+        var previousSongIndex = @songIndex - 1;
+        if (previousSongIndex >= 0) {
+            location.href = "/Home/PlaylistPlayer?PlaylistId=@playlist.ID&index=" + previousSongIndex
+        }
+    }
+    function changeVolume(e) {
+        SongVolume = e.target.value
+        wavesurfer.setVolume(SongVolume);
+        localStorage.setItem("SongVolume", SongVolume)
+    }
+
+
+    const wavesurfer = new WaveSurfer.create({
+        container: "#@PlayerId",
+        waveColor: 'violet',
+        progressColor: 'purple'
+    });
+
+    $("#@PlayerId-play").click(() => wavesurfer.playPause());
+    $("#@PlayerId-mute").click(() => wavesurfer.toggleMute());
+    $("#@PlayerId-delete").click(() => location.href = "/Home/DeleteSong?SongId=@songList[songIndex].ID");
+
+    let SongVolume = localStorage.getItem("SongVolume");
+    if (SongVolume) {
+        wavesurfer.setVolume(SongVolume)
+    }
+    else {
+        SongVolume = 0.5
+        wavesurfer.setVolume(SongVolume);
+        localStorage.setItem("SongVolume", SongVolume)
+    }
+    document.querySelector('#@PlayerId-volume').value = SongVolume; // TODO: utilise jquery
+    $('#@PlayerId-volume').change(changeVolume)
+    wavesurfer.load("@songList[songIndex].Path");
+</script>

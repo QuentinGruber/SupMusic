@@ -63,6 +63,7 @@ namespace SupMusic.Controllers
             try
             {
                 playlist.OwnerID = _userManager.GetUserId(HttpContext.User);
+                playlist.Songs = "";
                 _db.Playlist.Add(playlist);
                 _db.SaveChanges();
                 ViewBag.resultMessage = "success";
@@ -106,7 +107,6 @@ namespace SupMusic.Controllers
             _db.SaveChanges();
             return RedirectToAction(nameof(playlists));
         }
-
         [HttpGet]
         public IActionResult DeleteSong(int? SongId)
         {
@@ -120,6 +120,24 @@ namespace SupMusic.Controllers
             System.IO.File.Delete("./wwwroot" + SongToDelete.Path);
             _db.Song.Attach(SongToDelete);
             _db.Song.Remove(SongToDelete);
+            _db.SaveChanges();
+            return RedirectToAction(nameof(Discover));
+        }
+        [HttpPost]
+        public IActionResult AddSongToPlaylist(AddPlaylistModel request)
+        {
+            Console.WriteLine(request.PlaylistId);
+            Console.WriteLine(request.UserId);
+            Console.WriteLine(request.SongId);
+            Playlist playlistTargeted = _db.Playlist.Find(request.PlaylistId);
+
+            if (playlistTargeted.OwnerID != request.UserId)
+            { // security
+                return RedirectToAction(nameof(Discover));
+            }
+            playlistTargeted.Songs += request.SongId.ToString() + ",";
+            Console.WriteLine(playlistTargeted.Songs);
+            _db.Playlist.Update(playlistTargeted);
             _db.SaveChanges();
             return RedirectToAction(nameof(Discover));
         }
@@ -146,11 +164,18 @@ namespace SupMusic.Controllers
             return View();
         }
 
-        public IActionResult PlaylistPlayer()
+        public IActionResult PlaylistPlayer(int? PlaylistId, int? index)
         {
 
-            var songList = _db.Song.ToList();
-            ViewBag.song = songList[0];
+            // fait check si public ou pas zebi
+            // querystring de plauylist id et d'un compteur voila mdr 
+
+            var playlist = _db.Playlist.Find(PlaylistId);
+            var songList = _db.Song.Where(song => playlist.Songs.Contains(song.ID.ToString()));
+            var userID = _userManager.GetUserId(HttpContext.User);
+            ViewBag.playlist = playlist;
+            ViewBag.index = index;
+            ViewBag.songList = songList.ToList();
             return View();
         }
 
