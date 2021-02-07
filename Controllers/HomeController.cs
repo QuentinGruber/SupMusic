@@ -170,10 +170,6 @@ namespace SupMusic.Controllers
                 return RedirectToAction(nameof(playlists));
             }
         }
-        public IActionResult Privacy()
-        {
-            return View();
-        }
 
         public IActionResult Discover()
         {
