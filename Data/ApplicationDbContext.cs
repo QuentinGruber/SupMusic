@@ -53,7 +53,7 @@ namespace SupMusic.Data
             Tags = "fete, clubbing",
             Name = "Playlist de test public",
             Songs = "1,2",
-            isPrivate = true
+            isPrivate = false
         },
         new Playlist
         {
@@ -61,7 +61,7 @@ namespace SupMusic.Data
             Tags = "fete, clubbing",
             Name = "Playlist de test privé",
             Songs = "1,2",
-            isPrivate = false
+            isPrivate = true
         }
     );
 

@@ -3,14 +3,15 @@
 @{
     ViewData["Title"] = "Discover";
     List<Song> songs = ViewBag.songs;
-    List<Playlist> playlists = ViewBag.playlists;
+    List<Playlist> userPlaylists = ViewBag.userPlaylists;
+    List<Playlist> pubPlaylists = ViewBag.pubPlaylists;
     string[] parseTags(string tags)
     {
         return tags.Split(',');
     }
     String userID = ViewBag.userID;
 }
-<h1 class="text-info">Discover new songs !</h1>
+<h2 class="text-info">Discover new songs !</h2>
 @foreach (var song in songs)
 {
     <div class="blueCard">
@@ -22,7 +23,7 @@
         }
         }
         @Html.Partial("_Player", song)
-         @foreach (var playlist in playlists)
+         @foreach (var playlist in userPlaylists)
             {
                 @if(!playlist.Songs.Contains(song.ID.ToString())){
                 <form asp-action="AddSongToPlaylist" method="post">
@@ -32,6 +33,22 @@
                 </form>
                 }
             }
+    </div>
+}
+
+<h2 class="text-info">Discover new playlists !</h2>
+@foreach (var playlist in pubPlaylists)
+{
+    <div class="blueCard">
+    <H2 class="text-primary">@playlist.Name</H2>
+    @if(playlist.Tags != null){
+        @foreach (var tag in playlist.Tags.Split(','))
+        {
+            <span class="badge badge-pill badge-warning">@tag</span>
+        }
+        }
+        <br>
+    <button onClick="location.href = '/Home/PlaylistPlayer?PlaylistId=@playlist.ID&index=0'"class="btn btn-primary">Listen</button>
     </div>
 }
 

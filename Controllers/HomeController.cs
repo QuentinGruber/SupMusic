@@ -175,26 +175,28 @@ namespace SupMusic.Controllers
         {
             var userID = _userManager.GetUserId(HttpContext.User);
             ViewBag.userID = userID;
-            List<Playlist> playlists = new List<Playlist>();
+            List<Playlist> pubPlaylists = new List<Playlist>();
+            List<Playlist> userPlaylists = new List<Playlist>();
             foreach (var playlist in _db.Playlist.ToList())
             {
+                var songList = _db.Song.Where(song => playlist.Songs.Contains(song.ID.ToString()));
+                if (playlist.isPrivate == false && songList.ToList().Count() > 0)
+                {
+                    pubPlaylists.Add(playlist);
+                }
                 if (playlist.OwnerID == userID)
                 {
-                    playlists.Add(playlist);
+                    userPlaylists.Add(playlist);
                 }
             }
-            ViewBag.playlists = playlists;
-
+            ViewBag.pubPlaylists = pubPlaylists;
+            ViewBag.userPlaylists = userPlaylists;
             ViewBag.songs = _db.Song.ToList();
             return View();
         }
 
         public IActionResult PlaylistPlayer(int? PlaylistId, int? index)
         {
-
-            // fait check si public ou pas zebi
-            // querystring de plauylist id et d'un compteur voila mdr 
-
             var playlist = _db.Playlist.Find(PlaylistId);
             var songList = _db.Song.Where(song => playlist.Songs.Contains(song.ID.ToString()));
             var userID = _userManager.GetUserId(HttpContext.User);
@@ -206,7 +208,19 @@ namespace SupMusic.Controllers
             ViewBag.index = index;
             ViewBag.songList = songList.ToList();
             ViewBag.userID = userID;
-            return View();
+            if (ViewBag.songList.Count < 1)
+            {
+                // this issue can happen if all the songs from a playlist are deleted
+                // reset the list of songs so the user can't try again to listen this playlist
+                playlist.Songs = "";
+                _db.Playlist.Update(playlist);
+                _db.SaveChanges();
+                return Redirect(Request.Headers["Referer"].ToString());
+            }
+            else
+            {
+                return View();
+            }
         }
         [AllowAnonymous]
         public ActionResult switchTheme()
