@@ -26,7 +26,7 @@ List of all songs we have on the site , can listen to them & add to playlist
                      <input type="hidden" asp-for="PlaylistId" value="@playlist.ID" />
                      <input type="hidden" asp-for="UserId" value="@userID" />
                      <input type="hidden" asp-for="SongId" value="@song.ID" />
-                <input type="submit" runat="server" onserverclick="AddSongToPlaylist" value="Add to @playlist.Name"/>
+                <input type="submit" runat="server" onserverclick="AddSongToPlaylist" value="Add to @playlist.Name" class="btn btn-outline-Info"/>
                 </form>
                 }
             }

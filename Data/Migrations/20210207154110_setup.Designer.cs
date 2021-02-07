@@ -10,7 +10,7 @@ using SupMusic.Data;
 namespace SupMusic.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210207150527_setup")]
+    [Migration("20210207154110_setup")]
     partial class setup
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

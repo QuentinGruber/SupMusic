@@ -3,12 +3,12 @@
 }
 <div id=@PlayerId></div>
 
-<button id="@PlayerId-play">play</button>
-<button id="@PlayerId-mute">mute</button>
-<input id="@PlayerId-volume" type="range" min="0" max="1" value="1" step="0.1">
+<button id="@PlayerId-play" class="btn btn-primary">play</button>
+<button id="@PlayerId-mute" class="btn btn-warning">mute</button>
+<input id="@PlayerId-volume" type="range" min="0" max="1" value="1" step="0.1" class="btn btn-info">
 @if (@ViewBag.userID == @Model.OwnerID)
 {
-    <button id="@PlayerId-delete">delete</button>
+    <button id="@PlayerId-delete" class="btn btn-danger">delete</button>
 }
 
 <script src="https://unpkg.com/wavesurfer.js"></script>
