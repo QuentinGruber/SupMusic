@@ -34,7 +34,7 @@ List of all songs we have on the site , can listen to them & add to playlist
         @if(song.Tags != null){
         @foreach (var tag in parseTags(song.Tags))
         {
-            <div>@tag</div>
+            <span class="badge badge-pill badge-primary">@tag</span>
         }
         }
         @Html.Partial("_Player", song)
