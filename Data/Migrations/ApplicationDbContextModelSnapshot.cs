@@ -250,17 +250,17 @@ namespace SupMusic.Data.Migrations
                         new
                         {
                             ID = 1,
-                            Name = "Playlist de test public",
-                            Songs = "1,2",
-                            Tags = "fete, clubbing",
-                            isPrivate = true
+                            Name = "Big Fiesta/Party Playlist",
+                            Songs = "1,4",
+                            Tags = "party,clubbing,bringue,all night long",
+                            isPrivate = false
                         },
                         new
                         {
                             ID = 2,
-                            Name = "Playlist de test privé",
-                            Songs = "1,2",
-                            Tags = "fete, clubbing",
+                            Name = "Chill",
+                            Songs = "5,3,2,6",
+                            Tags = "relax, very relax",
                             isPrivate = false
                         });
                 });
@@ -271,9 +271,6 @@ namespace SupMusic.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
-
-                    b.Property<int>("Duration")
-                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasMaxLength(64)
@@ -296,20 +293,50 @@ namespace SupMusic.Data.Migrations
                         new
                         {
                             ID = 1,
-                            Duration = 69,
                             Name = "feteMan",
                             OwnerID = "-1",
                             Path = "/songs/fete.wav",
-                            Tags = "fete, clubbing"
+                            Tags = "party,clubbing"
                         },
                         new
                         {
                             ID = 2,
-                            Duration = 69,
                             Name = "Doja Cat",
                             OwnerID = "-1",
                             Path = "/songs/Doja Cat - Say So (Official Video).mp3",
-                            Tags = "pas, fou, egirl"
+                            Tags = "egirl"
+                        },
+                        new
+                        {
+                            ID = 3,
+                            Name = "Serpent Maigre",
+                            OwnerID = "-1",
+                            Path = "/songs/serpent-maigre.wav",
+                            Tags = "jazz,clarinet,orchestra"
+                        },
+                        new
+                        {
+                            ID = 4,
+                            Name = "Hey Hey Hey - Carlos feat Bitconnect",
+                            OwnerID = "-1",
+                            Path = "/songs/bitconnect-remix-warning-scam.mp3",
+                            Tags = "Scam,Bold man"
+                        },
+                        new
+                        {
+                            ID = 5,
+                            Name = "The song of the great Monarch - Sylvain Durif ",
+                            OwnerID = "-1",
+                            Path = "/songs/la-chanson-du-grand-monarque-sylvain-durif-cest-moi.mp3",
+                            Tags = "cloud"
+                        },
+                        new
+                        {
+                            ID = 6,
+                            Name = "I've Had The Time Of My Life",
+                            OwnerID = "-1",
+                            Path = "/songs/dirty-dancing-soundtrack-ive-had-the-time-of-my-life.mp3",
+                            Tags = "Dirty Dancing"
                         });
                 });
 

@@ -8,7 +8,6 @@ namespace SupMusic.Models
         public string OwnerID { get; set; }
         public string Tags { get; set; }
         public string Name { get; set; }
-        public int Duration { get; set; }
         public string Path { get; set; }
     }
 }

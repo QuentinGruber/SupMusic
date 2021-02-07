@@ -50,18 +50,18 @@ namespace SupMusic.Data
         new Playlist
         {
             ID = 1,
-            Tags = "fete, clubbing",
-            Name = "Playlist de test public",
-            Songs = "1,2",
+            Tags = "party,clubbing,bringue,all night long",
+            Name = "Big Fiesta/Party Playlist",
+            Songs = "1,4",
             isPrivate = false
         },
         new Playlist
         {
             ID = 2,
-            Tags = "fete, clubbing",
-            Name = "Playlist de test privé",
-            Songs = "1,2",
-            isPrivate = true
+            Tags = "relax, very relax",
+            Name = "Chill",
+            Songs = "5,3,2,6",
+            isPrivate = false
         }
     );
 
@@ -83,20 +83,50 @@ namespace SupMusic.Data
         {
             ID = 1,
             OwnerID = "-1",
-            Tags = "fete, clubbing",
+            Tags = "party,clubbing",
             Name = "feteMan",
-            Path = "/songs/fete.wav",
-            Duration = 69
+            Path = "/songs/fete.wav"
         },
         new Song
         {
             ID = 2,
             OwnerID = "-1",
-            Tags = "pas, fou, egirl",
+            Tags = "egirl",
             Name = "Doja Cat",
-            Path = "/songs/Doja Cat - Say So (Official Video).mp3",
-            Duration = 69
-        }
+            Path = "/songs/Doja Cat - Say So (Official Video).mp3"
+        },
+        new Song
+        {
+            ID = 3,
+            OwnerID = "-1",
+            Tags = "jazz,clarinet,orchestra",
+            Name = "Serpent Maigre",
+            Path = "/songs/serpent-maigre.wav"
+        },
+         new Song
+         {
+             ID = 4,
+             OwnerID = "-1",
+             Tags = "Scam,Bold man",
+             Name = "Hey Hey Hey - Carlos feat Bitconnect",
+             Path = "/songs/bitconnect-remix-warning-scam.mp3"
+         },
+         new Song
+         {
+             ID = 5,
+             OwnerID = "-1",
+             Tags = "cloud",
+             Name = "The song of the great Monarch - Sylvain Durif ",
+             Path = "/songs/la-chanson-du-grand-monarque-sylvain-durif-cest-moi.mp3"
+         },
+            new Song
+            {
+                ID = 6,
+                OwnerID = "-1",
+                Tags = "Dirty Dancing",
+                Name = "I've Had The Time Of My Life",
+                Path = "/songs/dirty-dancing-soundtrack-ive-had-the-time-of-my-life.mp3"
+            }
     );
         }
     }
