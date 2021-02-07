@@ -17,6 +17,7 @@ namespace SupMusic.Controllers
     [Authorize]
     public class HomeController : Controller
     {
+
         private readonly ApplicationDbContext _db;
         private readonly UserManager<IdentityUser> _userManager;
 
@@ -179,6 +180,18 @@ namespace SupMusic.Controllers
             return View();
         }
 
+        public ActionResult switchTheme()
+        {
+            if (Global.isInDarkMode == true)
+            {
+                Global.isInDarkMode = false;
+            }
+            else
+            {
+                Global.isInDarkMode = true;
+            }
+            return Redirect(Request.Headers["Referer"].ToString());
+        }
 
         public IActionResult CreatePlaylist()
         {

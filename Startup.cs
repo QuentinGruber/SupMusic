@@ -15,6 +15,11 @@ using System.Threading.Tasks;
 
 namespace SupMusic
 {
+
+    public class Global
+    {
+        public static Boolean isInDarkMode = false;
+    }
     public class Startup
     {
         public Startup(IConfiguration configuration)
