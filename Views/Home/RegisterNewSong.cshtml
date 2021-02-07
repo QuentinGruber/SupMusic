@@ -1,6 +1,23 @@
 @{
-    ViewData["Title"] = "Register result";
+    ViewData["Title"] = "Register song";
     String resultMessage = ViewBag.resultMessage;
+    Song song = ViewBag.song;
 }
 
-<h3>@resultMessage</h3>
+@if (@resultMessage == "success")
+{
+    <h1 class="text-info">Your song "@song.Name" has been registered on the site !</h1>
+    <h2 class="text-warning">You can delete it at any time from the site by clicking on the "delete" button.</h2>
+    <h3 class="text-primary">You will soon be redirected to the discover page.</h3>
+}
+else
+{
+    <h1 class="text-danger">Something didn't work :( sorry for that.</h1>
+    <p>@resultMessage</p>
+}
+
+<script>
+    if ("@resultMessage" == "success") {
+        setTimeout(() => location.href = "/Home/Discover", 8000)
+    }
+</script>

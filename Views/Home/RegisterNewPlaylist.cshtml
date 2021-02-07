@@ -1,6 +1,24 @@
 @{
-    ViewData["Title"] = "Register result";
+    ViewData["Title"] = "Register playlist";
     String resultMessage = ViewBag.resultMessage;
+    Playlist playlist = ViewBag.playlist;
 }
 
-<h3>@resultMessage</h3>
+@if(@resultMessage == "success")
+{
+    <h1 class="text-info">Your playlist "@playlist.Name" has been created !</h1>
+    @if(playlist.isPrivate != true){
+        <h2 class="text-warning">Be careful your playlist is public everyone can see it! You can change this <a href="/Home/EditPlaylist?PlaylistId=@playlist.ID">here</a></h2>
+    }
+    <h3 class="text-primary">You will soon be redirected to your playlist.</h3>
+}
+else{
+    <h1 class="text-danger">Something didn't work :( sorry for that.</h1>
+    <p>@resultMessage</p>
+}
+
+<script>
+    if("@resultMessage" == "success"){
+     setTimeout(()=>location.href="/Home/Playlists",8000)
+    }
+</script>

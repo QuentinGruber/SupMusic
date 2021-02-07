@@ -47,6 +47,7 @@ namespace SupMusic.Controllers
                 song.OwnerID = _userManager.GetUserId(HttpContext.User);
                 _db.Song.Add(song);
                 _db.SaveChanges();
+                ViewBag.song = song;
                 ViewBag.resultMessage = "success";
 
 
@@ -68,9 +69,8 @@ namespace SupMusic.Controllers
                 playlist.Songs = "";
                 _db.Playlist.Add(playlist);
                 _db.SaveChanges();
+                ViewBag.playlist = playlist;
                 ViewBag.resultMessage = "success";
-
-
             }
             catch (System.Exception error)
             {
