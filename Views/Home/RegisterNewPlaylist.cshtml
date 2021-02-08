@@ -4,15 +4,17 @@
     Playlist playlist = ViewBag.playlist;
 }
 
-@if(@resultMessage == "success")
+@if (@resultMessage == "success")
 {
     <h1 class="text-info">Your playlist "@playlist.Name" has been created !</h1>
-    @if(playlist.isPrivate != true){
+    @if (playlist.isPrivate != true)
+    {
         <h2 class="text-warning">Be careful your playlist is public everyone can see it! You can change this <a href="/Home/EditPlaylist?PlaylistId=@playlist.ID">here</a></h2>
     }
     <h3 class="text-primary">You will soon be redirected to your playlist.</h3>
 }
-else{
+else
+{
     <h1 class="text-danger">Something didn't work :( sorry for that.</h1>
     <p>@resultMessage</p>
 }

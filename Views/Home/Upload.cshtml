@@ -4,24 +4,24 @@
 @model SupMusic.Models.Song;
 
 <h1 class="text-primary">Submit a new song !</h1>
-<hr />
-@using (Html.BeginForm("RegisterNewSong", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+<hr/>
+@using (Html.BeginForm("RegisterNewSong", "Home", FormMethod.Post, new {enctype = "multipart/form-data"}))
 {
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
                 <label asp-for="Name" class="control-label text-primary"></label>
-                <input asp-for="Name" class="form-control" />
+                <input asp-for="Name" class="form-control"/>
             </div>
             <div class="form-group">
                 <label asp-for="Tags" class="control-label text-primary"></label>
-                <input asp-for="Tags" class="form-control" />
+                <input asp-for="Tags" class="form-control"/>
             </div>
             <div class="form-group">
                 <label class="control-label text-primary">Song file :</label>
-                <input class="form-control" id="FileUpload" name="file" type="File" runat="server" size="60" />
+                <input class="form-control" id="FileUpload" name="file" type="File" runat="server" size="60"/>
             </div>
-            <input type="submit" value="Submit song" class="btn btn-success" />
+            <input type="submit" value="Submit song" class="btn btn-success"/>
         </div>
     </div>
 }

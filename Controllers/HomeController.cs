@@ -9,12 +9,12 @@ using SupMusic.Data;
 using System.IO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+
 namespace SupMusic.Controllers
 {
     [Authorize]
     public class HomeController : Controller
     {
-
         private readonly ApplicationDbContext _db;
         private readonly UserManager<IdentityUser> _userManager;
 
@@ -41,18 +41,18 @@ namespace SupMusic.Controllers
                 {
                     file.CopyTo(fileStream);
                 }
+
                 song.OwnerID = _userManager.GetUserId(HttpContext.User);
                 _db.Song.Add(song);
                 _db.SaveChanges();
                 ViewBag.song = song;
                 ViewBag.resultMessage = "success";
-
-
             }
             catch (System.Exception error)
             {
                 ViewBag.resultMessage = error.ToString();
             }
+
             return View();
         }
 
@@ -73,6 +73,7 @@ namespace SupMusic.Controllers
             {
                 ViewBag.resultMessage = error.ToString();
             }
+
             return View();
         }
 
@@ -83,10 +84,12 @@ namespace SupMusic.Controllers
             {
                 modifiedPlaylist.Songs = "";
             }
+
             _db.Playlist.Update(modifiedPlaylist);
             _db.SaveChanges();
             return RedirectToAction(nameof(playlists));
         }
+
         [HttpGet]
         public IActionResult EditPlaylist(int? PlaylistId)
         {
@@ -102,6 +105,7 @@ namespace SupMusic.Controllers
             if (choosenPlaylist == null) return NotFound();
             return View(choosenPlaylist);
         }
+
         [HttpPost]
         public IActionResult DeletePlaylistConfirmed(Playlist PlaylistToDelete)
         {
@@ -110,6 +114,7 @@ namespace SupMusic.Controllers
             _db.SaveChanges();
             return RedirectToAction(nameof(playlists));
         }
+
         [HttpGet]
         public IActionResult DeleteSong(int? SongId)
         {
@@ -117,6 +122,7 @@ namespace SupMusic.Controllers
             if (choosenSong == null) return NotFound();
             return View(choosenSong);
         }
+
         [HttpPost]
         public IActionResult DeleteSongConfirmed(Song SongToDelete)
         {
@@ -126,28 +132,34 @@ namespace SupMusic.Controllers
             _db.SaveChanges();
             return RedirectToAction(nameof(Discover));
         }
+
         [HttpPost]
         public IActionResult AddSongToPlaylist(ModifyPlaylistModel request)
         {
             Playlist playlistTargeted = _db.Playlist.Find(request.PlaylistId);
             var userID = _userManager.GetUserId(HttpContext.User);
             if (playlistTargeted.OwnerID != userID)
-            {   // for security reason
+            {
+                // for security reason
                 return RedirectToAction(nameof(Discover));
             }
+
             playlistTargeted.Songs += request.SongId.ToString() + ",";
             _db.Playlist.Update(playlistTargeted);
             _db.SaveChanges();
             return RedirectToAction(nameof(Discover));
         }
+
         public IActionResult RemoveSongToPlaylist(ModifyPlaylistModel request)
         {
             Playlist playlistTargeted = _db.Playlist.Find(request.PlaylistId);
             var userID = _userManager.GetUserId(HttpContext.User);
             if (playlistTargeted.OwnerID != userID)
-            {   // for security reason
+            {
+                // for security reason
                 return RedirectToAction(nameof(Discover));
             }
+
             var listOfSongs = playlistTargeted.Songs.Split(',').ToList();
             listOfSongs.Remove(request.SongId);
             String StringOfSongs = "";
@@ -155,6 +167,7 @@ namespace SupMusic.Controllers
             {
                 StringOfSongs += song + ",";
             }
+
             playlistTargeted.Songs = StringOfSongs;
             _db.Playlist.Update(playlistTargeted);
             _db.SaveChanges();
@@ -181,11 +194,13 @@ namespace SupMusic.Controllers
                 {
                     pubPlaylists.Add(playlist);
                 }
+
                 if (playlist.OwnerID == userID)
                 {
                     userPlaylists.Add(playlist);
                 }
             }
+
             ViewBag.pubPlaylists = pubPlaylists;
             ViewBag.userPlaylists = userPlaylists;
             ViewBag.songs = _db.Song.ToList();
@@ -198,9 +213,11 @@ namespace SupMusic.Controllers
             var songList = _db.Song.Where(song => playlist.Songs.Contains(song.ID.ToString()));
             var userID = _userManager.GetUserId(HttpContext.User);
             if (index >= songList.Count())
-            {   // if index is out of range
+            {
+                // if index is out of range
                 index = 0;
             }
+
             ViewBag.playlist = playlist;
             ViewBag.index = index;
             ViewBag.songList = songList.ToList();
@@ -219,6 +236,7 @@ namespace SupMusic.Controllers
                 return View();
             }
         }
+
         [AllowAnonymous]
         public ActionResult switchTheme()
         {
@@ -230,6 +248,7 @@ namespace SupMusic.Controllers
             {
                 Global.isInDarkMode = true;
             }
+
             return Redirect(Request.Headers["Referer"].ToString());
         }
 
@@ -255,7 +274,7 @@ namespace SupMusic.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
         }
     }
 }

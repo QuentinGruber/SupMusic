@@ -9,8 +9,8 @@
 
 <h3>Are you sure you want to delete "@Model.Name" song?</h3>
 <form asp-action="DeleteSongConfirmed">
-    <input type="hidden" asp-for="ID" />
-    <input type="hidden" asp-for="Path" />
-    <input type="submit" value="Delete" class="btn btn-danger" /> |
+    <input type="hidden" asp-for="ID"/>
+    <input type="hidden" asp-for="Path"/>
+    <input type="submit" value="Delete" class="btn btn-danger"/> |
     <a asp-action="Playlists">Back to List</a>
 </form>

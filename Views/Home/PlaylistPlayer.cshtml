@@ -7,35 +7,39 @@
 }
 
 <div class="blueCard">
-<h2 class="text-info">@songList[songIndex].Name</h2>
-<div id=@PlayerId></div>
-<div class="player_buttons">
-<button onclick="previousSong()" class="btn btn-secondary">previous</button>
-<button id="@PlayerId-mute" class="btn btn-warning">mute</button>
-<button id="@PlayerId-play" class="btn btn-primary">play/pause</button>
-<input id="@PlayerId-volume" type="range" min="0.05" max="1" step="0.05" class="btn btn-info">
-<button onclick="nextSong()" class="btn btn-secondary">next</button>
-@if (@ViewBag.userID == @playlist.OwnerID)
-{
-    <button id="@PlayerId-delete" class="btn btn-danger">Remove from playlist</button>
-}
-</div>
+    <h2 class="text-info">@songList[songIndex].Name</h2>
+    <div id=@PlayerId></div>
+    <div class="player_buttons">
+        <button onclick="previousSong()" class="btn btn-secondary">previous</button>
+        <button id="@PlayerId-mute" class="btn btn-warning">mute</button>
+        <button id="@PlayerId-play" class="btn btn-primary">play/pause</button>
+        <input id="@PlayerId-volume" type="range" min="0.05" max="1" step="0.05" class="btn btn-info">
+        <button onclick="nextSong()" class="btn btn-secondary">next</button>
+        @if (@ViewBag.userID == @playlist.OwnerID)
+        {
+            <button id="@PlayerId-delete" class="btn btn-danger">Remove from playlist</button>
+        }
+    </div>
 </div>
 <div class="listOfSongs">
-<h4 class="text-primary">Playlist "@playlist.Name" contains these tracks :</h4>
-<ol>
-    @for (int i = 0; i < songList.Count; i++)
-    {
-        Song song = songList[i];
-                @if(song.ID == songList[songIndex].ID){
-            <li class="text-success">@song.Name</li>
+    <h4 class="text-primary">Playlist "@playlist.Name" contains these tracks :</h4>
+    <ol>
+        @for (int i = 0; i < songList.Count; i++)
+        {
+            Song song = songList[i];
+            @if (song.ID == songList[songIndex].ID)
+            {
+                <li class="text-success">@song.Name</li>
+            }
+            else
+            {
+                <li class="text-primary text-large">
+                    @song.Name <button class="btn btn-info" onclick="location.href = '/Home/PlaylistPlayer?PlaylistId=@playlist.ID&index=@i'">play</button>
+                </li>
+            }
         }
-        else{
-        <li class="text-primary text-large">@song.Name <button class="btn btn-info" onclick="location.href = '/Home/PlaylistPlayer?PlaylistId=@playlist.ID&index=@i'">play</button></li>
-        }
-    }
 
-</ol>
+    </ol>
 </div>
 
 <script src="https://unpkg.com/wavesurfer.js"></script>

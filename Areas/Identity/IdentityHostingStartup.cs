@@ -8,14 +8,14 @@ using Microsoft.Extensions.DependencyInjection;
 using SupMusic.Data;
 
 [assembly: HostingStartup(typeof(SupMusic.Areas.Identity.IdentityHostingStartup))]
+
 namespace SupMusic.Areas.Identity
 {
     public class IdentityHostingStartup : IHostingStartup
     {
         public void Configure(IWebHostBuilder builder)
         {
-            builder.ConfigureServices((context, services) => {
-            });
+            builder.ConfigureServices((context, services) => { });
         }
     }
 }
