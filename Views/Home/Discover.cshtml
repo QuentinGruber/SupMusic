@@ -45,7 +45,7 @@
 @foreach (var playlist in pubPlaylists)
 {
     <div class="blueCard">
-        <H2 class="text-primary">@playlist.Name</H2>
+        <H2 class="text-info">@playlist.Name</H2>
         @if (playlist.Tags != null)
         {
             @foreach (var tag in playlist.Tags.Split(','))
