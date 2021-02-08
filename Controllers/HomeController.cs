@@ -1,13 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using SupMusic.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.EntityFrameworkCore;
 using SupMusic.Data;
 using System.IO;
 using Microsoft.AspNetCore.Http;
@@ -42,7 +39,7 @@ namespace SupMusic.Controllers
                 song.Path = "/songs/" + song.Name + ".wav";
                 using (var fileStream = new FileStream("./wwwroot" + song.Path, FileMode.Create, FileAccess.Write))
                 {
-                    file.CopyTo(fileStream); //copy the file that was sent to this path
+                    file.CopyTo(fileStream);
                 }
                 song.OwnerID = _userManager.GetUserId(HttpContext.User);
                 _db.Song.Add(song);
@@ -135,7 +132,7 @@ namespace SupMusic.Controllers
             Playlist playlistTargeted = _db.Playlist.Find(request.PlaylistId);
             var userID = _userManager.GetUserId(HttpContext.User);
             if (playlistTargeted.OwnerID != userID)
-            { // security
+            {   // for security reason
                 return RedirectToAction(nameof(Discover));
             }
             playlistTargeted.Songs += request.SongId.ToString() + ",";
@@ -148,10 +145,10 @@ namespace SupMusic.Controllers
             Playlist playlistTargeted = _db.Playlist.Find(request.PlaylistId);
             var userID = _userManager.GetUserId(HttpContext.User);
             if (playlistTargeted.OwnerID != userID)
-            {
+            {   // for security reason
                 return RedirectToAction(nameof(Discover));
             }
-            var listOfSongs = playlistTargeted.Songs.Split(',').ToList();// += request.SongId.ToString() + ",";
+            var listOfSongs = playlistTargeted.Songs.Split(',').ToList();
             listOfSongs.Remove(request.SongId);
             String StringOfSongs = "";
             foreach (var song in listOfSongs)
@@ -201,7 +198,7 @@ namespace SupMusic.Controllers
             var songList = _db.Song.Where(song => playlist.Songs.Contains(song.ID.ToString()));
             var userID = _userManager.GetUserId(HttpContext.User);
             if (index >= songList.Count())
-            {
+            {   // if index is out of range
                 index = 0;
             }
             ViewBag.playlist = playlist;
