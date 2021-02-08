@@ -23,26 +23,16 @@ namespace SupMusic.Data
 
             modelBuilder.Entity<IdentityUser>(n =>
             {
-                // clé primaire
                 n.HasKey(p => p.Id);
             });
 
             modelBuilder.Entity<Playlist>(n =>
             {
-                // clé primaire
                 n.HasKey(p => p.ID);
 
-                // id auto-increment non null
                 n.Property(f => f.ID).ValueGeneratedOnAdd();
 
-                // taille maxi
                 n.Property(p => p.Name).HasMaxLength(64);
-
-                // clé étrangère (song id)
-                /*   n.HasMany<Song>()
-                   .WithOne()
-                   .HasForeignKey(fk => fk.ID);
-                   */
             });
 
             modelBuilder.Entity<Playlist>()
@@ -67,13 +57,10 @@ namespace SupMusic.Data
 
             modelBuilder.Entity<Song>(n =>
             {
-                // clé primaire
                 n.HasKey(p => p.ID);
 
-                // id auto_increment non null
                 n.Property(f => f.ID).ValueGeneratedOnAdd();
 
-                // taille maxi
                 n.Property(p => p.Name).HasMaxLength(64);
             });
 
