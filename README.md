@@ -8,10 +8,10 @@
 # Installation
 
 - `dotnet tool install --global dotnet-ef` ( If you already have dotnet-ef skip this )
-- `dotnet ef database update`
+- `dotnet ef database update` to update the local database with the migrations.
 
 # Usage
 
-- `dotnet run`
+- `dotnet run` the site will be running at your port 5000/5001
 
 
